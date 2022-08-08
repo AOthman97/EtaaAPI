@@ -1,3 +1,6 @@
+using EtaaAPI.Core.Interfaces;
+using EtaaAPI.EF;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,8 +12,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddControllers();
 
 // Add the models services here
-builder.Services.AddTransient(typeof(IBaseRepo<>), typeof(BaseRepo<>));
-//builder.Services.AddTransient<IMoviesService, MoviesService>();
+// *This is the old way that do not use the Unit of Work pattern, It deals with the IBaseRepo directly
+//builder.Services.AddTransient(typeof(IBaseRepo<>), typeof(BaseRepo<>));
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 // Add automapper here
 //builder.Services.AddAutoMapper(typeof(Program));
