@@ -62,7 +62,10 @@ namespace EtaaAPI.EF.Repos
         public T Add(T entity)
         {
             _context.Set<T>().Add(entity);
-            _context.SaveChanges();
+            // The save changes part was removed because now we're using unit of work and there we have a Complete() method
+            // that saves the changes in the DB and returns the number of rows effected. We're goin to use it in the 
+            // Contributors controller first
+            //_context.SaveChanges();
 
             return entity;
         }
@@ -70,9 +73,25 @@ namespace EtaaAPI.EF.Repos
         public IEnumerable<T> AddMultiple(IEnumerable<T> entities)
         {
             _context.Set<T>().AddRange(entities);
-            _context.SaveChanges();
+            //_context.SaveChanges();
 
             return entities;
+        }
+
+        public T Update(T entity)
+        {
+            _context.Update(entity);
+            //_context.SaveChanges();
+
+            return entity;
+        }
+
+        public bool Delete(T entity)
+        {
+            _context.Remove(entity);
+            //_context.SaveChanges();
+
+            return true;
         }
     }
 }

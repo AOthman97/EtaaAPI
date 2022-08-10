@@ -12,6 +12,7 @@ namespace EtaaAPI.Core.Interfaces
     {
         // You should do the same for all models
         IBaseRepo<Contributor> Contributors { get; }
+        IProjectsRepo Projects { get; }
         // This is going to be used like the db context and it's going to return the number of rows affected
         int Complete();
     }

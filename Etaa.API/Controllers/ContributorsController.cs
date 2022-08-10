@@ -48,10 +48,15 @@ namespace Etaa.API.Controllers
         }
 
         [HttpPost("AddSingle")]
-        public IActionResult AddSingle(GenreDto genre)
+        public IActionResult AddSingle(ContributorDto contributorDto)
         {
             //Contributor contributor = new() { NameEn = genre.Name };
-            return Ok(_unitOfWork.Contributors.Add(new Contributor { NameAr = "تستنج", NameEn = "Testing", MonthlyShareAmount = 5000, DistrictId = 3}));
+            // Now we've removed the SaveChanges() from the Base repo and instead used the unit of work to save changes
+            var Contributor = _unitOfWork.Contributors.Add(new Contributor { NameAr = "تستنج 7777", NameEn = "Testing 999", MonthlyShareAmount = 5000, DistrictId = 3, IsActive = true, IsCanceled = false });
+            // It's pretty useful when adding multiple entities to the DB or updating, removing them by just calling this
+            // method in the action of the controller at the very end
+            _unitOfWork.Complete();
+            return Ok(Contributor);
         }
     }
 }

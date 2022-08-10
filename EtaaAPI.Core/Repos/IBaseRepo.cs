@@ -17,5 +17,7 @@ namespace EtaaAPI.Core.Repos
         IEnumerable<T> FindAll(Expression<Func<T, bool>> Match, string[]? Includes = null);
         T Add(T entity);
         IEnumerable<T> AddMultiple(IEnumerable<T> entities);
+        T Update(T entity);
+        bool Delete(T entity);
     }
 }
