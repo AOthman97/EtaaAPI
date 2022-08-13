@@ -50,13 +50,32 @@ namespace Etaa.API.Controllers
         [HttpPost("AddSingle")]
         public IActionResult AddSingle(ContributorDto contributorDto)
         {
-            //Contributor contributor = new() { NameEn = genre.Name };
+            Contributor contributor = new()
+            {
+                NameEn = contributorDto.NameEn,
+                NameAr = contributorDto.NameAr,
+                Address = contributorDto.Address,
+                Email = contributorDto.Email,
+                StartDate = contributorDto.StartDate,
+                EndDate = contributorDto.EndDate,
+                IsActive = true,
+                IsCanceled = false,
+                Mobile = contributorDto.Mobile,
+                MonthlyShareAmount = contributorDto.MonthlyShareAmount,
+                NumberOfShares = contributorDto.NumberOfShares,
+                WhatsappMobile = contributorDto.WhatsappMobile,
+                DistrictId = contributorDto.DistrictId
+            };
             // Now we've removed the SaveChanges() from the Base repo and instead used the unit of work to save changes
-            var Contributor = _unitOfWork.Contributors.Add(new Contributor { NameAr = "تستنج 7777", NameEn = "Testing 999", MonthlyShareAmount = 5000, DistrictId = 3, IsActive = true, IsCanceled = false });
+            //var Contributor = _unitOfWork.Contributors.Add(new Contributor { NameAr = "تستنج 7777", NameEn = "Testing 999", MonthlyShareAmount = 5000, DistrictId = 3, IsActive = true, IsCanceled = false });
+            var Contributor = _unitOfWork.Contributors.Add(contributor);
             // It's pretty useful when adding multiple entities to the DB or updating, removing them by just calling this
             // method in the action of the controller at the very end
-            _unitOfWork.Complete();
-            return Ok(Contributor);
+            int NumberAffected = _unitOfWork.Complete();
+            if(NumberAffected > 0)
+                return Ok(Contributor);
+            else
+                return BadRequest();
         }
     }
 }
