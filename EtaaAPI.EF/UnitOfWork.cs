@@ -17,6 +17,7 @@ namespace EtaaAPI.EF
 
         // You should do this for all models, The 'private set is because we only want to assign it values privately here'
         public IBaseRepo<Contributor> Contributors { get; private set; }
+        public IBaseRepo<State> States { get; private set; }
 
         public IProjectsRepo Projects { get; private set; }
 
@@ -26,6 +27,7 @@ namespace EtaaAPI.EF
 
             // You should do this for all models
             Contributors = new BaseRepo<Contributor>(_context);
+            States = new BaseRepo<State>(_context);
             Projects = new ProjectsRepo(_context);
         }
 
