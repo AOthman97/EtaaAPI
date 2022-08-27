@@ -16,6 +16,8 @@ namespace EtaaAPI.Core.Interfaces
         IBaseRepo<HealthStatus> HealthStatuses { get; }
         IBaseRepo<Installments> Installments { get; }
         IBaseRepo<InvestmentType> InvestmentTypes { get; }
+        IBaseRepo<Job> Jobs { get; }
+        IBaseRepo<Kinship> Kinships { get; }
         // The Project model was seperated from the other models because it should have it's own unique methods/actions
         // + the standard ones from the base repo
         IProjectsRepo Projects { get; }

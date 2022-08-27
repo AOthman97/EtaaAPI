@@ -21,6 +21,8 @@ namespace EtaaAPI.EF
         public IBaseRepo<HealthStatus> HealthStatuses { get; private set; }
         public IBaseRepo<Installments> Installments { get; private set; }
         public IBaseRepo<InvestmentType> InvestmentTypes { get; private set; }
+        public IBaseRepo<Job> Jobs { get; private set; }
+        public IBaseRepo<Kinship> Kinships { get; private set; }
         public IProjectsRepo Projects { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
@@ -38,6 +40,8 @@ namespace EtaaAPI.EF
             HealthStatuses = new BaseRepo<HealthStatus>(_context);
             Installments = new BaseRepo<Installments>(_context);
             InvestmentTypes = new BaseRepo<InvestmentType>(_context);
+            Jobs = new BaseRepo<Job>(_context);
+            Kinships = new BaseRepo<Kinship>(_context);
             Projects = new ProjectsRepo(_context);
         }
 
