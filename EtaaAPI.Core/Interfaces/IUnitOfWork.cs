@@ -11,6 +11,7 @@ namespace EtaaAPI.Core.Interfaces
         IBaseRepo<City> Cities { get; }
         IBaseRepo<District> Districts { get; }
         IBaseRepo<AccommodationType> AccommodationTypes { get; }
+        IBaseRepo<EducationalStatus> EducationalStatuses { get; }
         // The Project model was seperated from the other models because it should have it's own unique methods/actions
         // + the standard ones from the base repo
         IProjectsRepo Projects { get; }
