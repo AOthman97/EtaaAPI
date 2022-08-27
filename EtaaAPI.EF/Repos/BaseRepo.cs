@@ -120,10 +120,13 @@ namespace EtaaAPI.EF.Repos
         public bool Delete(int Id)
         {
             var Model = _context.Set<T>().Find(Id);
-            _context.Remove(Model);
-            //_context.SaveChanges();
-
-            return true;
+            if (Model != null)
+            {
+                _context.Remove(Model);
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

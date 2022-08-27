@@ -3,11 +3,6 @@ using EtaaAPI.Core.Interfaces;
 using EtaaAPI.Core.Repos;
 using EtaaAPI.EF.Repos;
 using MoviesProject.EF;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EtaaAPI.EF
 {
