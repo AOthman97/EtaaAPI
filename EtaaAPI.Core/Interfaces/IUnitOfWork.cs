@@ -1,10 +1,5 @@
 ﻿using EtaaApi.Core.Models;
 using EtaaAPI.Core.Repos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EtaaAPI.Core.Interfaces
 {
@@ -13,6 +8,9 @@ namespace EtaaAPI.Core.Interfaces
         // You should do the same for all models
         IBaseRepo<Contributor> Contributors { get; }
         IBaseRepo<State> States { get; }
+        IBaseRepo<City> Cities { get; }
+        IBaseRepo<District> Districts { get; }
+        IBaseRepo<AccommodationType> AccommodationTypes { get; }
         // The Project model was seperated from the other models because it should have it's own unique methods/actions
         // + the standard ones from the base repo
         IProjectsRepo Projects { get; }

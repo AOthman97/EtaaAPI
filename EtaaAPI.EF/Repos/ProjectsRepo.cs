@@ -4,7 +4,9 @@ using MoviesProject.EF;
 
 namespace EtaaAPI.EF.Repos
 {
-    // By inheriting from the BaseRepo and sending it the Projects model we're getting everyting that is in BaseRepo
+    // By inheriting from the BaseRepo and sending it the Projects model we're getting everyting that is in BaseRepo,
+    // I'm doing this because this model in particular has some end points that are specific to it and it won't be used by
+    // any else model.
     public class ProjectsRepo : BaseRepo<Projects>, IProjectsRepo
     {
         // It's protected because this project is the only one allowed to deal with the DB directly

@@ -1,6 +1,4 @@
-﻿using EtaaAPI.Core.Interfaces;
-
-namespace Etaa.API.Controllers
+﻿namespace Etaa.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -22,6 +22,17 @@ namespace EtaaAPI.EF.Repos
         // method
         public async Task<T> GetById(int Id) => await _context.Set<T>().FindAsync(Id);
 
+        public async Task<T> GetById(Expression<Func<T, bool>> Match, string[]? Includes = null)
+        {
+            IQueryable<T> Query = _context.Set<T>();
+
+            if (Includes != null)
+                foreach (var Included in Includes)
+                    Query = Query.Include(Included);
+
+            return await Query.SingleOrDefaultAsync(Match);
+        }
+
         // We've added an optional array of values that would be used to include any other models that we need
         public async Task<T> Find(Expression<Func<T, bool>> Match, string[]? Includes = null)
         {
@@ -59,6 +70,26 @@ namespace EtaaAPI.EF.Repos
             return Query.AsNoTracking().Where(Match).ToList();
         }
 
+        public IEnumerable<T> FindAll(string[]? Includes = null)
+        {
+            // Old: This would just directly query the first or default element and it won't include any
+            // other model
+            //return await _context.Set<T>().FirstOrDefaultAsync();
+
+            // New
+            IQueryable<T> Query = _context.Set<T>();
+
+            // The included here refers to all models that are also included in this query so that instead of just
+            // getting the DistrictId and the District object would be null, We'll return the whole District object
+            // that has the same ID as the one we're sending
+            if (Includes != null)
+                foreach (var Included in Includes)
+                    Query = Query.Include(Included);
+
+            // We're using 'Where' here because we're selecting more than one element
+            return Query.AsNoTracking().ToList();
+        }
+
         public T Add(T entity)
         {
             _context.Set<T>().Add(entity);
@@ -86,9 +117,10 @@ namespace EtaaAPI.EF.Repos
             return entity;
         }
 
-        public bool Delete(T entity)
+        public bool Delete(int Id)
         {
-            _context.Remove(entity);
+            var Model = _context.Set<T>().Find(Id);
+            _context.Remove(Model);
             //_context.SaveChanges();
 
             return true;

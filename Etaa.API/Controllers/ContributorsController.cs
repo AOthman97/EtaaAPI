@@ -1,8 +1,4 @@
-﻿using EtaaApi.Core.Models;
-using EtaaAPI.Core.Interfaces;
-using MoviesProject.Dtos;
-
-namespace Etaa.API.Controllers
+﻿namespace Etaa.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,7 +21,8 @@ namespace Etaa.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetById(int ContributorId)
         {
-            return Ok(await _unitOfWork.Contributors.GetById(ContributorId));
+            //return Ok(await _unitOfWork.Contributors.GetById(ContributorId));
+            return Ok(await _unitOfWork.Contributors.GetById(C => C.ContributorId.Equals(ContributorId), new[] { "District" }));
         }
 
         [HttpGet("GetByNameWithDistrict")]
@@ -51,59 +48,99 @@ namespace Etaa.API.Controllers
         [HttpPost("AddSingle")]
         public IActionResult AddSingle(ContributorDto contributorDto)
         {
-            Contributor contributor = new()
+            try
             {
-                NameEn = contributorDto.NameEn,
-                NameAr = contributorDto.NameAr,
-                Address = contributorDto.Address,
-                Email = contributorDto.Email,
-                StartDate = contributorDto.StartDate,
-                EndDate = contributorDto.EndDate,
-                IsActive = true,
-                IsCanceled = false,
-                Mobile = contributorDto.Mobile,
-                MonthlyShareAmount = contributorDto.MonthlyShareAmount,
-                NumberOfShares = contributorDto.NumberOfShares,
-                WhatsappMobile = contributorDto.WhatsappMobile,
-                DistrictId = contributorDto.DistrictId
-            };
-            // Now we've removed the SaveChanges() from the Base repo and instead used the unit of work to save changes
-            //var Contributor = _unitOfWork.Contributors.Add(new Contributor { NameAr = "تستنج 7777", NameEn = "Testing 999", MonthlyShareAmount = 5000, DistrictId = 3, IsActive = true, IsCanceled = false });
-            var Contributor = _unitOfWork.Contributors.Add(contributor);
-            // It's pretty useful when adding multiple entities to the DB or updating, removing them by just calling this
-            // method in the action of the controller at the very end
-            int NumberAffected = _unitOfWork.Complete();
-            if(NumberAffected > 0)
-                return Ok(Contributor);
-            else
-                return BadRequest();
+                Contributor contributor = new()
+                {
+                    NameEn = contributorDto.NameEn,
+                    NameAr = contributorDto.NameAr,
+                    Address = contributorDto.Address,
+                    Email = contributorDto.Email,
+                    StartDate = contributorDto.StartDate,
+                    EndDate = contributorDto.EndDate,
+                    IsActive = true,
+                    IsCanceled = false,
+                    Mobile = contributorDto.Mobile,
+                    MonthlyShareAmount = contributorDto.MonthlyShareAmount,
+                    NumberOfShares = contributorDto.NumberOfShares,
+                    WhatsappMobile = contributorDto.WhatsappMobile,
+                    DistrictId = contributorDto.DistrictId
+                };
+                // Now we've removed the SaveChanges() from the Base repo and instead used the unit of work to save changes
+                //var Contributor = _unitOfWork.Contributors.Add(new Contributor { NameAr = "تستنج 7777", NameEn = "Testing 999", MonthlyShareAmount = 5000, DistrictId = 3, IsActive = true, IsCanceled = false });
+                var Contributor = _unitOfWork.Contributors.Add(contributor);
+                // It's pretty useful when adding multiple entities to the DB or updating, removing them by just calling this
+                // method in the action of the controller at the very end
+                int NumberAffected = _unitOfWork.Complete();
+                if (NumberAffected > 0)
+                    return Ok(Contributor);
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("UpdateSingle")]
-        public IActionResult UpdateSingle(ContributorDto contributorDto)
+        public IActionResult UpdateSingle(ContributorDto ContributorDto)
         {
-            Contributor contributor = new()
+            try
             {
-                NameEn = contributorDto.NameEn,
-                NameAr = contributorDto.NameAr,
-                Address = contributorDto.Address,
-                Email = contributorDto.Email,
-                StartDate = contributorDto.StartDate,
-                EndDate = contributorDto.EndDate,
-                IsActive = true,
-                IsCanceled = false,
-                Mobile = contributorDto.Mobile,
-                MonthlyShareAmount = contributorDto.MonthlyShareAmount,
-                NumberOfShares = contributorDto.NumberOfShares,
-                WhatsappMobile = contributorDto.WhatsappMobile,
-                DistrictId = contributorDto.DistrictId
-            };
-            var Contributor = _unitOfWork.Contributors.Add(contributor);
-            int NumberAffected = _unitOfWork.Complete();
-            if (NumberAffected > 0)
-                return Ok(Contributor);
-            else
-                return BadRequest();
+                Contributor contributor = new()
+                {
+                    ContributorId = ContributorDto.ContributorId,
+                    NameEn = ContributorDto.NameEn,
+                    NameAr = ContributorDto.NameAr,
+                    Address = ContributorDto.Address,
+                    Email = ContributorDto.Email,
+                    StartDate = ContributorDto.StartDate,
+                    EndDate = ContributorDto.EndDate,
+                    IsActive = true,
+                    IsCanceled = false,
+                    Mobile = ContributorDto.Mobile,
+                    MonthlyShareAmount = ContributorDto.MonthlyShareAmount,
+                    NumberOfShares = ContributorDto.NumberOfShares,
+                    WhatsappMobile = ContributorDto.WhatsappMobile,
+                    DistrictId = ContributorDto.DistrictId
+                };
+                var Contributor = _unitOfWork.Contributors.Update(contributor);
+                int NumberAffected = _unitOfWork.Complete();
+                if (NumberAffected > 0)
+                    return Ok(Contributor);
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("DeleteSingle")]
+        public IActionResult DeleteSingle(int ContributorId)
+        {
+            try
+            {
+                var IsDeleted = _unitOfWork.Contributors.Delete(ContributorId);
+                if (IsDeleted)
+                {
+                    int NumberAffected = _unitOfWork.Complete();
+                    if (NumberAffected > 0)
+                        return Ok(true);
+                    else
+                        return BadRequest();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
