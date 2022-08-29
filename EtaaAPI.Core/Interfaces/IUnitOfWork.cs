@@ -19,6 +19,19 @@ namespace EtaaAPI.Core.Interfaces
         IBaseRepo<Job> Jobs { get; }
         IBaseRepo<Kinship> Kinships { get; }
         IBaseRepo<MartialStatus> MartialStatuses { get; }
+        IBaseRepo<NumberOfFunds> NumberOfFunds { get; }
+        IBaseRepo<ProjectDomainTypes> ProjectDomainTypes { get; }
+        IBaseRepo<ProjectGroup> ProjectGroups { get; }
+        IBaseRepo<ProjectsAssets> ProjectsAssets { get; }
+        IBaseRepo<ProjectAssetesProjectTypeAssets> ProjectAssetesProjectTypeAssets { get; }
+        IBaseRepo<ProjectSelectionReasons> ProjectSelectionReasons { get; }
+        IBaseRepo<ProjectSocialBenefits> ProjectSocialBenefits { get; }
+        IBaseRepo<ProjectsSelectionReasons> ProjectsSelectionReasons { get; }
+        IBaseRepo<ProjectsSocialBenefits> ProjectsSocialBenefits { get; }
+        IBaseRepo<ProjectTypes> ProjectTypes { get; }
+        IBaseRepo<ProjectTypesAssets> ProjectTypesAssets { get; }
+        IBaseRepo<Religion> Religions { get; }
+        
         // The Project model was seperated from the other models because it should have it's own unique methods/actions
         // + the standard ones from the base repo
         IProjectsRepo Projects { get; }

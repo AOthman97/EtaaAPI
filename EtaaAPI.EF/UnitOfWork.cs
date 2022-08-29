@@ -24,6 +24,19 @@ namespace EtaaAPI.EF
         public IBaseRepo<Job> Jobs { get; private set; }
         public IBaseRepo<Kinship> Kinships { get; private set; }
         public IBaseRepo<MartialStatus> MartialStatuses { get; private set; }
+        public IBaseRepo<NumberOfFunds> NumberOfFunds { get; private set; }
+        public IBaseRepo<ProjectDomainTypes> ProjectDomainTypes { get; private set; }
+        public IBaseRepo<ProjectGroup> ProjectGroups { get; private set; }
+        public IBaseRepo<ProjectsAssets> ProjectsAssets { get; private set; }
+        public IBaseRepo<ProjectAssetesProjectTypeAssets> ProjectAssetesProjectTypeAssets { get; private set; }
+        public IBaseRepo<ProjectSelectionReasons> ProjectSelectionReasons { get; private set; }
+        public IBaseRepo<ProjectSocialBenefits> ProjectSocialBenefits { get; private set; }
+        public IBaseRepo<ProjectsSelectionReasons> ProjectsSelectionReasons { get; private set; }
+        public IBaseRepo<ProjectsSocialBenefits> ProjectsSocialBenefits { get; private set; }
+        public IBaseRepo<ProjectTypes> ProjectTypes { get; private set; }
+        public IBaseRepo<ProjectTypesAssets> ProjectTypesAssets { get; private set; }
+        public IBaseRepo<Religion> Religions { get; private set; }
+
         public IProjectsRepo Projects { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
@@ -44,6 +57,19 @@ namespace EtaaAPI.EF
             Jobs = new BaseRepo<Job>(_context);
             Kinships = new BaseRepo<Kinship>(_context);
             MartialStatuses = new BaseRepo<MartialStatus>(_context);
+            NumberOfFunds = new BaseRepo<NumberOfFunds>(_context);
+            ProjectDomainTypes = new BaseRepo<ProjectDomainTypes>(_context);
+            ProjectGroups = new BaseRepo<ProjectGroup>(_context);
+            ProjectsAssets = new BaseRepo<ProjectsAssets>(_context);
+            ProjectAssetesProjectTypeAssets = new BaseRepo<ProjectAssetesProjectTypeAssets>(_context);
+            ProjectSelectionReasons = new BaseRepo<ProjectSelectionReasons>(_context);
+            ProjectSocialBenefits = new BaseRepo<ProjectSocialBenefits>(_context);
+            ProjectsSelectionReasons = new BaseRepo<ProjectsSelectionReasons>(_context);
+            ProjectsSocialBenefits = new BaseRepo<ProjectsSocialBenefits>(_context);
+            ProjectTypes = new BaseRepo<ProjectTypes>(_context);
+            ProjectTypesAssets = new BaseRepo<ProjectTypesAssets>(_context);
+            Religions = new BaseRepo<Religion>(_context);
+
             Projects = new ProjectsRepo(_context);
         }
 
