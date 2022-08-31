@@ -36,6 +36,7 @@ namespace EtaaAPI.EF
         public IBaseRepo<ProjectTypes> ProjectTypes { get; private set; }
         public IBaseRepo<ProjectTypesAssets> ProjectTypesAssets { get; private set; }
         public IBaseRepo<Religion> Religions { get; private set; }
+        public IBaseRepo<Family> Families { get; private set; }
 
         public IProjectsRepo Projects { get; private set; }
 
@@ -69,6 +70,7 @@ namespace EtaaAPI.EF
             ProjectTypes = new BaseRepo<ProjectTypes>(_context);
             ProjectTypesAssets = new BaseRepo<ProjectTypesAssets>(_context);
             Religions = new BaseRepo<Religion>(_context);
+            Families = new BaseRepo<Family>(_context);
 
             Projects = new ProjectsRepo(_context);
         }

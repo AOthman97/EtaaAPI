@@ -31,6 +31,7 @@ namespace EtaaAPI.Core.Interfaces
         IBaseRepo<ProjectTypes> ProjectTypes { get; }
         IBaseRepo<ProjectTypesAssets> ProjectTypesAssets { get; }
         IBaseRepo<Religion> Religions { get; }
+        IBaseRepo<Family> Families { get; }
         
         // The Project model was seperated from the other models because it should have it's own unique methods/actions
         // + the standard ones from the base repo
