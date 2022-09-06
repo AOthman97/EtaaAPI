@@ -21,7 +21,6 @@
         [HttpGet]
         public async Task<IActionResult> GetById(int ContributorId)
         {
-            //return Ok(await _unitOfWork.Contributors.GetById(ContributorId));
             return Ok(await _unitOfWork.Contributors.GetById(C => C.ContributorId.Equals(ContributorId), new[] { "District" }));
         }
 
@@ -37,12 +36,12 @@
         }
 
         [HttpGet("FindAllWithDistrict")]
-        public IActionResult FindAll()
+        public IActionResult FindAll(string Prefix)
         {
             // After adding the new optional param that should hold the name of the model we want to include
             // in the data that is being queried, We'll include the District model here to be also present
             // in the result data
-            return Ok(_unitOfWork.Contributors.FindAll(C => C.NameEn.Contains("Qut"), new[] { "District" }));
+            return Ok(_unitOfWork.Contributors.FindAll(C => C.NameEn.Contains(Prefix), new[] { "District" }));
         }
 
         [HttpPost("AddSingle")]

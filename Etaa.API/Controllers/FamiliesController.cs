@@ -20,8 +20,15 @@
         [HttpGet("GetById")]
         public async Task<IActionResult> GetById(int FamilyId)
         {
-            //return Ok(await _unitOfWork.Contributors.GetById(ContributorId));
             return Ok(await _unitOfWork.Families.GetById(F => F.FamilyId.Equals(FamilyId)));
+        }
+
+        [HttpGet("FindFamiliesForAutoComplete")]
+        public IActionResult FindAll(string Prefix)
+        {
+            List<Family> FamiliesList = new List<Family>();
+            FamiliesList.Add((Family)_unitOfWork.Families.FindAll(F => F.NameEn.Contains(Prefix) || F.NameAr.Contains(Prefix)));
+            return new JsonResult(FamiliesList);
         }
 
         [HttpPost("AddSingle")]
