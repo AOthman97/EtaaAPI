@@ -38,6 +38,7 @@ namespace EtaaAPI.EF
         public IBaseRepo<Religion> Religions { get; private set; }
         public IBaseRepo<Family> Families { get; private set; }
         public IBaseRepo<FamilyMember> FamilyMembers { get; private set; }
+        public IBaseRepo<FinancialStatement> FinancialStatements { get; private set; }
 
         public IProjectsRepo Projects { get; private set; }
 
@@ -73,6 +74,7 @@ namespace EtaaAPI.EF
             Religions = new BaseRepo<Religion>(_context);
             Families = new BaseRepo<Family>(_context);
             FamilyMembers = new BaseRepo<FamilyMember>(_context);
+            FinancialStatements = new BaseRepo<FinancialStatement>(_context);
 
             Projects = new ProjectsRepo(_context);
         }

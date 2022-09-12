@@ -33,6 +33,7 @@ namespace EtaaAPI.Core.Interfaces
         IBaseRepo<Religion> Religions { get; }
         IBaseRepo<Family> Families { get; }
         IBaseRepo<FamilyMember> FamilyMembers { get; }
+        IBaseRepo<FinancialStatement> FinancialStatements { get; }
         
         // The Project model was seperated from the other models because it should have it's own unique methods/actions
         // + the standard ones from the base repo

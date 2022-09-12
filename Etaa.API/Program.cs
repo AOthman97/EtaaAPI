@@ -15,6 +15,8 @@ builder.Services.AddControllers();
 // *This is the old way that do not use the Unit of Work pattern, It deals with the IBaseRepo directly
 //builder.Services.AddTransient(typeof(IBaseRepo<>), typeof(BaseRepo<>));
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IProjectsRepo, ProjectsRepo>();
+builder.Services.AddTransient<IFinancialStatementsRepo, FinancialStatementsRepo>();
 
 // Add automapper here
 //builder.Services.AddAutoMapper(typeof(Program));
