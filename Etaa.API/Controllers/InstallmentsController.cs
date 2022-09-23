@@ -1,4 +1,6 @@
-﻿namespace Etaa.API.Controllers
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace Etaa.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -15,6 +17,13 @@
         public IActionResult GetInstallments()
         {
             return Ok(_unitOfWork.Installments.GetAll().ToList());
+        }
+
+        [HttpGet("GetInstallmentForPaymentVoucher")]
+        public IActionResult GetInstallmentForPaymentVoucher(int PaymentVoucherId)
+        {
+            var PaymentVoucher = _unitOfWork.PaymentVouchers.GetById(p => p.PaymentVoucherId == PaymentVoucherId);
+            return Ok(_unitOfWork.Installments.GetById(i => i.InstallmentsId == PaymentVoucher.Result.InstallmentsId));
         }
 
         [HttpPost("AddSingle")]

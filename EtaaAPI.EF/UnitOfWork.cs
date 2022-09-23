@@ -39,6 +39,7 @@ namespace EtaaAPI.EF
         public IBaseRepo<Family> Families { get; private set; }
         public IBaseRepo<FamilyMember> FamilyMembers { get; private set; }
         public IBaseRepo<FinancialStatement> FinancialStatements { get; private set; }
+        public IBaseRepo<PaymentVoucher> PaymentVouchers { get; private set; }
 
         public IProjectsRepo Projects { get; private set; }
 
@@ -75,6 +76,7 @@ namespace EtaaAPI.EF
             Families = new BaseRepo<Family>(_context);
             FamilyMembers = new BaseRepo<FamilyMember>(_context);
             FinancialStatements = new BaseRepo<FinancialStatement>(_context);
+            PaymentVouchers = new BaseRepo<PaymentVoucher>(_context);
 
             Projects = new ProjectsRepo(_context);
         }

@@ -7,6 +7,7 @@ namespace EtaaAPI.Core.Repos
     // we're defining some that are specific to the Projects model
     public interface IFinancialStatementsRepo : IBaseRepo<FinancialStatement>
     {
+        // Have to figure out a way to make these two methods as one and just send Set<T>
         FinancialStatement CheckAlreadyPresent(int ProjectId);
         PaymentVoucher CheckAlreadyPresentInPaymentVoucher(int ProjectId);
     }
