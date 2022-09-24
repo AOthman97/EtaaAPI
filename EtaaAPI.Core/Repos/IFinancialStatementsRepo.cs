@@ -1,5 +1,4 @@
 ﻿using EtaaApi.Core.Models;
-using System.Linq.Expressions;
 
 namespace EtaaAPI.Core.Repos
 {

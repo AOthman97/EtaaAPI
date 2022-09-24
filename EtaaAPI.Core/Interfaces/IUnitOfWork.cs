@@ -39,6 +39,7 @@ namespace EtaaAPI.Core.Interfaces
         // The Project model was seperated from the other models because it should have it's own unique methods/actions
         // + the standard ones from the base repo
         IProjectsRepo Projects { get; }
+        IClearancesRepo Clearances { get; }
         // This is going to be used like the db context and it's going to return the number of rows affected
         int Complete();
     }

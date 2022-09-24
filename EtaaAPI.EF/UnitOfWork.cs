@@ -42,6 +42,7 @@ namespace EtaaAPI.EF
         public IBaseRepo<PaymentVoucher> PaymentVouchers { get; private set; }
 
         public IProjectsRepo Projects { get; private set; }
+        public IClearancesRepo Clearances { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -79,6 +80,7 @@ namespace EtaaAPI.EF
             PaymentVouchers = new BaseRepo<PaymentVoucher>(_context);
 
             Projects = new ProjectsRepo(_context);
+            Clearances = new ClearancesRepo(_context);
         }
 
         // All this what do is to return the number of rows affected

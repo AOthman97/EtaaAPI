@@ -19,9 +19,13 @@ namespace EtaaAPI.EF.Repos
         {
         }
 
-        public IEnumerable<Projects> ToDefineLater()
+        public int GetNumberOfInstallments(int ProjectId)
         {
-            throw new NotImplementedException();
+            int NumberOfInstallments = (from project in _context.Projects
+                                        where project.ProjectId == ProjectId
+                                        select (int)project.NumberOfInstallments).Single();
+
+            return NumberOfInstallments;
         }
     }
 }
