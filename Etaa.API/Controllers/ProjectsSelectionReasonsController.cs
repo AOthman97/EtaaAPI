@@ -5,16 +5,25 @@
     public class ProjectsSelectionReasonsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IProjectsSelectionReasonsRepo _projectsSelectionReasons;
 
-        public ProjectsSelectionReasonsController(IUnitOfWork unitOfWork)
+        public ProjectsSelectionReasonsController(IProjectsSelectionReasonsRepo projectsSelectionReasons,
+            IUnitOfWork unitOfWork)
         {
+            _projectsSelectionReasons = projectsSelectionReasons;
             _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
         public IActionResult GetProjectsSelectionReasons()
         {
-            return Ok(_unitOfWork.ProjectsSelectionReasons.GetAll().ToList());
+            return Ok(_projectsSelectionReasons.GetAll().ToList());
+        }
+
+        [HttpGet("GetProjectSelectionReasons")]
+        public IActionResult GetProjectSelectionReasons(int ProjectId)
+        {
+            return Ok(_projectsSelectionReasons.GetProjectsSelectionReasons(ProjectId));
         }
 
         [HttpPost("AddSingle")]
@@ -27,7 +36,7 @@
                     ProjectId = selectionReasonsDto.ProjectId,
                     ProjectSelectionReasonsId = selectionReasonsDto.ProjectSelectionReasonsId
                 };
-                var ProjectsSelectionReasons = _unitOfWork.ProjectsSelectionReasons.Add(selectionReasons);
+                var ProjectsSelectionReasons = _projectsSelectionReasons.Add(selectionReasons);
                 int NumberAffected = _unitOfWork.Complete();
                 if (NumberAffected > 0)
                     return Ok(ProjectsSelectionReasons);
@@ -51,7 +60,7 @@
                     ProjectId = selectionReasonsDto.ProjectId,
                     ProjectSelectionReasonsId = selectionReasonsDto.ProjectSelectionReasonsId
                 };
-                var ProjectsSelectionReasons = _unitOfWork.ProjectsSelectionReasons.Update(selectionReasons);
+                var ProjectsSelectionReasons = _projectsSelectionReasons.Update(selectionReasons);
                 int NumberAffected = _unitOfWork.Complete();
                 if (NumberAffected > 0)
                     return Ok(ProjectsSelectionReasons);
@@ -69,7 +78,7 @@
         {
             try
             {
-                var IsDeleted = _unitOfWork.ProjectsSelectionReasons.Delete(ProjectsSelectionReasonsId);
+                var IsDeleted = _projectsSelectionReasons.Delete(ProjectsSelectionReasonsId);
                 if (IsDeleted)
                 {
                     int NumberAffected = _unitOfWork.Complete();
