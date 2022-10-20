@@ -46,13 +46,12 @@
         public int FamilyId { get; set; }
         [Display(Name = "رقم التمويل")]
         public int NumberOfFundsId { get; set; }
-        [NotMapped]
-        public virtual ICollection<NumberOfFunds>? NumberOfFunds { get; set; }
+        //public virtual ICollection<NumberOfFunds>? NumberOfFunds { get; set; }
         // Relationship between the projects and families
         [Display(Name = "نوع المشروع")]
         public int ProjectTypeId { get; set; }
         [NotMapped]
-        public virtual ICollection<ProjectTypes>? ProjectTypes { get; set; }
+        //public virtual ICollection<ProjectTypes>? ProjectTypes { get; set; }
         [Display(Name = "إسم المستخدم")]
         public string? UserId { get; set; }
         [Display(Name = "إسم مستخدم الإدارة")]

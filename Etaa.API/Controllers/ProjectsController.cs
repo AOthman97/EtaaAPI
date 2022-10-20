@@ -1,4 +1,7 @@
-﻿namespace Etaa.API.Controllers
+﻿using EtaaAPI.Core.Models;
+using System.Collections;
+
+namespace Etaa.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -28,5 +31,29 @@
         // In the API version instead of returning all project types and a selected one maybe try to
         // get all of them seperately and then get the selected one either with the project data itself or make
         // a call to this endpoint, the GetProjectTypes(int ProjectId)
+        /*Projects project, [FromBody] List<ProjectsAssets> projectsAssets,
+                [FromBody] List<ProjectsSelectionReasons> projectsSelectionReasons,
+            [FromBody] List<ProjectsSocialBenefits> projectsSocialBenefits*/
+        [HttpPost("CreateProject")]
+        public async Task<IActionResult> CreateProject([FromBody] CompositeObject compositeObject)
+        {
+            try
+            {
+                ArrayList sf = new();
+                bool IsCreated = _projectsRepo.CreateProject(compositeObject.projectDto,
+                    compositeObject.projectsAssetsDto,
+                    compositeObject.projectsSelectionReasonsDto,
+                    compositeObject.projectsSocialBenefitsDto);
+
+                if (IsCreated)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

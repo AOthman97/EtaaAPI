@@ -71,6 +71,7 @@ namespace MoviesProject.EF
         public DbSet<Religion> Religions { get; set; }
         public DbSet<State> States { get; set; }
         //public DbSet<IdentityUser> IdentityUser { get; set; }
+        // This is a view and not a model
         public DbSet<ProjectAssetesProjectTypeAssets> ProjectAssetesProjectTypeAssets { get; set; }
     }
 }

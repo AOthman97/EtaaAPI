@@ -1,4 +1,5 @@
 ﻿using EtaaApi.Core.Models;
+using MoviesProject.Dtos;
 
 namespace EtaaAPI.Core.Repos
 {
@@ -7,5 +8,8 @@ namespace EtaaAPI.Core.Repos
     public interface IProjectsRepo : IBaseRepo<Projects>
     {
         int GetNumberOfInstallments(int ProjectId);
+        bool CreateProject(ProjectDto projectDto, List<ProjectsAssetsDto> projectsAssetsDto, 
+                List<ProjectsSelectionReasonsDto> projectsSelectionReasonsDto, 
+            List<ProjectsSocialBenefitsDto> projectsSocialBenefitsDto);
     }
 }
