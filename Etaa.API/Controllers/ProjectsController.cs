@@ -1,5 +1,4 @@
 ﻿using EtaaAPI.Core.Models;
-using System.Collections;
 
 namespace Etaa.API.Controllers
 {
@@ -31,15 +30,11 @@ namespace Etaa.API.Controllers
         // In the API version instead of returning all project types and a selected one maybe try to
         // get all of them seperately and then get the selected one either with the project data itself or make
         // a call to this endpoint, the GetProjectTypes(int ProjectId)
-        /*Projects project, [FromBody] List<ProjectsAssets> projectsAssets,
-                [FromBody] List<ProjectsSelectionReasons> projectsSelectionReasons,
-            [FromBody] List<ProjectsSocialBenefits> projectsSocialBenefits*/
         [HttpPost("CreateProject")]
         public async Task<IActionResult> CreateProject([FromBody] CompositeObject compositeObject)
         {
             try
             {
-                ArrayList sf = new();
                 bool IsCreated = _projectsRepo.CreateProject(compositeObject.projectDto,
                     compositeObject.projectsAssetsDto,
                     compositeObject.projectsSelectionReasonsDto,
@@ -53,6 +48,45 @@ namespace Etaa.API.Controllers
             catch (Exception ex)
             {
                 return BadRequest();
+            }
+        }
+
+        [HttpPost("UpdateProject")]
+        public async Task<IActionResult> UpdateProject([FromBody] CompositeObject compositeObject)
+        {
+            try
+            {
+                bool IsCreated = _projectsRepo.UpdateProject(compositeObject.projectDto,
+                    compositeObject.projectsAssetsDto,
+                    compositeObject.projectsSelectionReasonsDto,
+                    compositeObject.projectsSocialBenefitsDto);
+
+                if (IsCreated)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteProject(int ProjectId)
+        {
+            try
+            {
+                bool IsDeleted = _projectsRepo.DeleteProject(ProjectId);
+
+                if (IsDeleted)
+                    return Ok("Project Canceled!");
+                else
+                    return BadRequest("Project not Canceled!");
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
     }

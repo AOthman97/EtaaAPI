@@ -11,5 +11,9 @@ namespace EtaaAPI.Core.Repos
         bool CreateProject(ProjectDto projectDto, List<ProjectsAssetsDto> projectsAssetsDto, 
                 List<ProjectsSelectionReasonsDto> projectsSelectionReasonsDto, 
             List<ProjectsSocialBenefitsDto> projectsSocialBenefitsDto);
+        bool UpdateProject(ProjectDto projectDto, List<ProjectsAssetsDto> projectsAssetsDto,
+                List<ProjectsSelectionReasonsDto> projectsSelectionReasonsDto,
+            List<ProjectsSocialBenefitsDto> projectsSocialBenefitsDto);
+        bool DeleteProject(int ProjectId);
     }
 }
