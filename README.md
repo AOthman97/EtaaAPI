@@ -1,0 +1,2 @@
+This is a basic MVP .Net API version of the `Etaa` project which is used to manage all of the related issues and the activities of charity organisations that are concerned with adding commercial projects to families in need.
+Each family can have one project at least and after the family is assigned a project, all of the project's data gets saved with the designated family and the family would then make monthly payments to get back the capital of the project back to the organisation and each payment is then registered until full payment is acheived.
